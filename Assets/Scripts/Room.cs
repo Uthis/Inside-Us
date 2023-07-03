@@ -24,12 +24,12 @@ public class Room : MonoBehaviour
     public void Tele(string name)
     {
         PointAsset point = pointList.First(x => x.nama.ToLower().Equals(name.ToLower()));
-        GameManager.instance.playerController.Transport(this, point.point);
+        MainManager.instance.playerController.Transport(this, point.point);
     }
     public void Move(string name)
     {
         PointAsset point = pointList.First(x => x.nama.ToLower() == name.ToLower());
-        GameManager.instance.playerController.MoveToPoint(point.point);
+        MainManager.instance.playerController.MoveToPoint(point.point);
     }
     public Transform GetPoint(string name)
     {

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public enum InteractType
 {
@@ -21,10 +23,14 @@ public class Interact
     public string name;
     public Sprite sprite;
     public InteractType type;
-    public string[] dialogTexts;
+    public LocalizedString[] dialogTexts;
     public CutsceneAsset Cutscene;
     public string targetRoom,targetPos;
 
+    public string[] GetDialogs()
+    {
+        return dialogTexts.Select(x => x.GetLocalizedString()).ToArray();
+    }
 }
 
 public class Interactables : MonoBehaviour
@@ -60,7 +66,7 @@ public class Interactables : MonoBehaviour
         triggerCol.gameObject.SetActive(isActive);
     }
 
-    public InteractType GetType()
+    public InteractType GetInteractType()
     {
         return currInteract.type;
     }

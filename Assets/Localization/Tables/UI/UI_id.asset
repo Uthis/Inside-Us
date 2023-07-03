@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_id
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: id
+  m_SharedData: {fileID: 11400000, guid: 276d99ddca25c9747ae0e871fb7d3c50, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 725806100480
+    m_Localized: Mulai
+    m_Metadata:
+      m_Items: []
+  - m_Id: 725843849216
+    m_Localized: Pengaturan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 725848043520
+    m_Localized: Indonesia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 725848043521
+    m_Localized: Inggris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 725856432128
+    m_Localized: Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1453081636864
+    m_Localized: Terimakasih sudah bermain!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1602004594688
+    m_Localized: Menu Utama
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6528319500288
+    m_Localized: Bahasa
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1

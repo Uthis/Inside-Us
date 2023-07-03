@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
                     Interact();
                 }
                 else
-                    GameManager.instance.reader.Continue();
+                    MainManager.instance.reader.Continue();
                 isInteracting = false;
             }
         }
@@ -119,14 +119,14 @@ public class PlayerController : MonoBehaviour
 
     void OnInteract(InputAction.CallbackContext context)
     {
-        if (GameManager.instance.dialogManager.isShowingDialog)
+        if (MainManager.instance.dialogManager.isShowingDialog)
         {
-            bool isDone = GameManager.instance.dialogManager.Next();
+            bool isDone = MainManager.instance.dialogManager.Next();
             if (isDone)
                 if (isControl)
                     SetMovement(true);
                 else
-                    GameManager.instance.reader.Continue();
+                    MainManager.instance.reader.Continue();
         }
         else if (cutscene.isShowing)
         {
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
                 if(isControl)
                     SetMovement(true);
                 else
-                    GameManager.instance.reader.Continue();
+                    MainManager.instance.reader.Continue();
         }
         else if (currInteractable != null)
         {
@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
         {
             case InteractType.Dialog:
                 SetMovement(false);
-                GameManager.instance.dialogManager.StartDialog("Player", currInteract.dialogTexts);
+                MainManager.instance.dialogManager.StartDialog("Player", currInteract.GetDialogs());
                 break;
             case InteractType.Scene:
                 SetMovement(false);
@@ -169,18 +169,18 @@ public class PlayerController : MonoBehaviour
                 //storyManager.NextScene();
                 break;
             case InteractType.Transport:
-                GameManager.instance.roomManager.Tele(currInteract.targetRoom, currInteract.targetPos);
+                MainManager.instance.roomManager.Tele(currInteract.targetRoom, currInteract.targetPos);
                 break;
             case InteractType.Trigger:
-                GameManager.instance.reader.SetTrigger(currInteract.name);
+                MainManager.instance.reader.SetTrigger(currInteract.name);
                 break;
             case InteractType.AutoTrigger:
-                GameManager.instance.reader.SetTrigger(currInteract.name);
+                MainManager.instance.reader.SetTrigger(currInteract.name);
                 break;
             case InteractType.TriggerWithDialog:
                 SetMovement(false);
-                GameManager.instance.dialogManager.StartDialog("Player", currInteract.dialogTexts);
-                GameManager.instance.reader.SetTrigger(currInteract.name);
+                MainManager.instance.dialogManager.StartDialog("Player", currInteract.GetDialogs());
+                MainManager.instance.reader.SetTrigger(currInteract.name);
                 break;
             default:
                 //SetMovement(true);
@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
         if(collision.CompareTag("Interactable"))
         {
             currInteractable = collision.GetComponentInParent<Interactables>();
-            InteractType type = currInteractable.GetType();
+            InteractType type = currInteractable.GetInteractType();
             if (type != InteractType.Off && type != InteractType.AutoTrigger)
                 currInteractable.ShowInteract(true);
             else if(type == InteractType.AutoTrigger)

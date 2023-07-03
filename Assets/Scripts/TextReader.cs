@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class TextReader : MonoBehaviour
 {
     public delegate bool StorylineMethod(params object[] args);
-    [SerializeField] TextAsset storyline;
+    [SerializeField] LocalizedAsset<TextAsset> storyAsset;
     int indexLine = 0;
     List<KeyValuePair<StorylineMethod, object[]>> lines;
     Dictionary<string, bool> Triggers;
@@ -47,6 +48,7 @@ public class TextReader : MonoBehaviour
 
         var splitFile = new string[] { "\r\n", "\r", "\n" };
         var splitLine = new char[] { ',' };
+        TextAsset storyline = storyAsset.LoadAsset();
         var Lines = storyline.text.Split(splitFile, System.StringSplitOptions.RemoveEmptyEntries);
         for (int i = 0; i < Lines.Length; i++)
         {
@@ -144,23 +146,23 @@ public class TextReader : MonoBehaviour
 
     bool LockControl(params object[] args)
     {
-        GameManager.instance.playerController.SetControl(false);
+        MainManager.instance.playerController.SetControl(false);
         Debug.Log("Lock Control");
         return true;
     }
 
     bool FullControl(params object[] args)
     {
-        AnimAsset player = GameManager.instance.anims.First(x => x.nama == "Player");
+        AnimAsset player = MainManager.instance.anims.First(x => x.nama == "Player");
         player.anim.Play("Idle");
-        GameManager.instance.playerController.SetControl(true);
+        MainManager.instance.playerController.SetControl(true);
         Debug.Log("Full Control");
         return true;
     }
 
     bool Anim(params object[] args)
     {
-        AnimAsset animAsset = GameManager.instance.anims.First(x => x.nama.ToLower() == args[0].ToString().ToLower());
+        AnimAsset animAsset = MainManager.instance.anims.First(x => x.nama.ToLower() == args[0].ToString().ToLower());
         animAsset.anim.Play(args[1].ToString());
         if (!args.Contains("NoWait") && isRead)
             StartCoroutine(DelayAnim(animAsset.anim));
@@ -169,13 +171,13 @@ public class TextReader : MonoBehaviour
     }
     bool AnimObject(params object[] args)
     {
-        Interactables animAsset = GameManager.instance.interactablesList.First(x => x.nama.ToLower() == args[0].ToString().ToLower()).interactables;
+        Interactables animAsset = MainManager.instance.interactablesList.First(x => x.nama.ToLower() == args[0].ToString().ToLower()).interactables;
         animAsset.PlayAnim(args[1].ToString());
         if (!args.Contains("NoWait") && isRead)
             StartCoroutine(DelayAnim(animAsset.anim));
         if (!args.Contains("NoHide"))
         {
-            AnimAsset player = GameManager.instance.anims.First(x => x.nama == "Player");
+            AnimAsset player = MainManager.instance.anims.First(x => x.nama == "Player");
             player.anim.Play("Hide");
         }
         Debug.Log("Object Animation : " + args[0] + "," + args[1]);
@@ -184,23 +186,23 @@ public class TextReader : MonoBehaviour
 
     bool VFX(params object[] args)
     {
-        GameManager.instance.vfx.Play(args[0].ToString());
+        MainManager.instance.vfx.Play(args[0].ToString());
         if (!args.Contains("NoWait") && isRead)
-            StartCoroutine(DelayAnim(GameManager.instance.vfx));
+            StartCoroutine(DelayAnim(MainManager.instance.vfx));
         Debug.Log("VFX : " +args[0]);
         return true;
     }
 
     bool SFX(params object[] args)
     {
-        GameManager.instance.sfx.PlayOneShot(GameManager.instance.sfxList.First(x =>x.nama == args[0].ToString()).clip);
+        MainManager.instance.sfx.PlayOneShot(MainManager.instance.sfxList.First(x =>x.nama == args[0].ToString()).clip);
         Debug.Log("SFX : " + args[0]);
         return true;
     }
 
     public bool Dialog(params object[] args)
     {
-        GameManager.instance.dialogManager.StartDialog(args[0].ToString(), new string[] { args[1].ToString() });
+        MainManager.instance.dialogManager.StartDialog(args[0].ToString(), new string[] { args[1].ToString() });
         isRead = false;
         Debug.Log("Dialog : " + args[0] + "," + args[1]);
         return true;
@@ -208,7 +210,7 @@ public class TextReader : MonoBehaviour
 
     bool State(params object[] args)
     {
-        InteractablesAsset interactablesAsset = GameManager.instance.interactablesList.First(x => x.nama == args[0].ToString());
+        InteractablesAsset interactablesAsset = MainManager.instance.interactablesList.First(x => x.nama == args[0].ToString());
         interactablesAsset.interactables.SetInteract(int.Parse(args[1].ToString()));
         Debug.Log("State : " + args[0] + "," + args[1]);
         return true;
@@ -216,7 +218,7 @@ public class TextReader : MonoBehaviour
 
     bool Go(params object[] args)
     {
-        GameManager.instance.roomManager.Move(args[0].ToString());
+        MainManager.instance.roomManager.Move(args[0].ToString());
         isRead = false;
         Debug.Log("GO : " + args[0]);
         return true;
@@ -224,8 +226,8 @@ public class TextReader : MonoBehaviour
 
     bool Move(params object[] args)
     {
-        Transform entity = GameManager.instance.entityList.First(x => x.name.ToLower().Equals(args[0].ToString().ToLower())).entity;
-        Transform pos = GameManager.instance.roomManager.GetPoint(args[1].ToString(), args[2].ToString());
+        Transform entity = MainManager.instance.entityList.First(x => x.name.ToLower().Equals(args[0].ToString().ToLower())).entity;
+        Transform pos = MainManager.instance.roomManager.GetPoint(args[1].ToString(), args[2].ToString());
         entity.position = pos.position;
         Debug.Log("Move : " + args[0] + "," + args[1] + "," + args[2]);
         return true;
@@ -233,7 +235,7 @@ public class TextReader : MonoBehaviour
 
     bool Cutscene(params object[] args)
     {
-        GameManager.instance.cutsceneManager.Play(args[0].ToString());
+        MainManager.instance.cutsceneManager.Play(args[0].ToString());
         isRead = false;
         Debug.Log("Cutscene : " + args[0]);
         return true;
@@ -241,18 +243,18 @@ public class TextReader : MonoBehaviour
 
     bool Tele(params object[] args)
     {
-        GameManager.instance.roomManager.Tele(args[0].ToString(), args[1].ToString());
-        GameManager.instance.playerController.SetControl(false);
+        MainManager.instance.roomManager.Tele(args[0].ToString(), args[1].ToString());
+        MainManager.instance.playerController.SetControl(false);
         Debug.Log("Tele : " + args[0] + "," + args[1]);
         return true;
     }
 
     bool Camera(params object[] args)
     {
-        GameManager.instance.cfx.Play(args[0].ToString());
+        MainManager.instance.cfx.Play(args[0].ToString());
         if (isRead)
         {
-            float duration = GameManager.instance.cfx.GetCurrentAnimatorClipInfo(0).Length;
+            float duration = MainManager.instance.cfx.GetCurrentAnimatorClipInfo(0).Length;
             StartCoroutine(DelayRead(duration));
         }
         Debug.Log("Camera : " + args[0]);
@@ -261,7 +263,7 @@ public class TextReader : MonoBehaviour
 
     bool Room(params object[] args)
     {
-        GameManager.instance.roomManager.SetRoom(args[0].ToString(), int.Parse(args[1].ToString()));
+        MainManager.instance.roomManager.SetRoom(args[0].ToString(), int.Parse(args[1].ToString()));
         Debug.Log("Room : " + args[0] + "," + args[1]);
         return true;
     }
@@ -299,7 +301,7 @@ public class TextReader : MonoBehaviour
     public void Continue()
     {
         isRead = true;
-        GameManager.instance.playerController.SetControl(false);
+        MainManager.instance.playerController.SetControl(false);
         Debug.Log("Continue");
     }
 
@@ -324,7 +326,7 @@ public class TextReader : MonoBehaviour
     bool End(params object[] args)
     {
         isRead = false;
-        GameManager.instance.gameOver.SetActive(true);
+        MainManager.instance.gameOver.SetActive(true);
         return true;
     }
 }

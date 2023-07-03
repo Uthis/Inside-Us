@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -77,7 +78,7 @@ public class SceneDialogue : MonoBehaviour
         CutsceneAction currAction = cutscene.actions[cutsceneIndex];
         img.sprite = currAction.image;
         img.enabled = true;
-        textToWrite = currAction.text.ToArray();
+        textToWrite = currAction.text.Select(x=>x.GetLocalizedString()).ToArray();
         textIndex = 0;
         SetText();
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
@@ -10,75 +11,44 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public PlayerController playerController;
-    public CutsceneManager cutsceneManager;
-    public DialogManager dialogManager;
-    public RoomManager roomManager;
-    public Animator vfx,cfx;
-    public AudioSource sfx;
-    public TextReader reader;
-    public GameObject gameOver;
-
-    public List<AnimAsset> anims;
-    public List<AudioAsset> sfxList;
-    public List<InteractablesAsset> interactablesList;
-    public List<EntityAsset> entityList;
-
-    private void Awake()
-    {
-        instance = this;
-    }
+    bool isChanging;
 
     public void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
-}
-[Serializable]
-public class AnimAsset
-{
-    public string nama;
-    public Animator anim;
-}
 
-[Serializable]
-public class AudioAsset
-{
-    public string nama;
-    public AudioClip clip;
-}
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
-[Serializable]
-public class InteractablesAsset
-{
-    public string nama;
-    public Interactables interactables;
-}
+    private void Start()
+    {
+        int id = PlayerPrefs.GetInt("LocaleKey", 0);
+        ChangeLocale(id);
+    }
 
-[Serializable]
-public class PointAsset
-{
-    public string nama;
-    public Transform point;
-}
+    public void ChangeLocale(int id)
+    {
+        if (isChanging) return;
+        StartCoroutine(SetLocale(id));
+    }
 
-[Serializable]
-public class CutsceneAsset
-{
-    public string nama;
-    public List<CutsceneAction> actions;
-}
-
-[Serializable]
-public class CutsceneAction
-{
-    public Sprite image;
-    public List<string> text;
-}
-
-[Serializable]
-public class EntityAsset
-{
-    public string name;
-    public Transform entity;
+    IEnumerator SetLocale(int id)
+    {
+        isChanging = true;
+        yield return LocalizationSettings.InitializationOperation;
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[id];
+        PlayerPrefs.SetInt("LocaleKey", id);
+        isChanging = false;
+    }
 }

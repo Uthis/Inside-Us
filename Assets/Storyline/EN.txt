@@ -1,0 +1,76 @@
+﻿[Together]
+[Lock Control]
+[Anim2] Sofa,Sleep,NoWait
+[VFX] FadeOut
+[End Together]
+[State] Sofa,1
+[Trigger] Sofa
+[State] Sofa,0
+[Anim2] Sofa,Default,NoWait,NoHide
+[Anim] Player,Idle,NoWait
+[State] Kulkas,1
+[Dialog] Player,“I need to drink”
+[Full Control]
+[Trigger] Kulkas
+[State] Kulkas,0
+[Anim2] Kulkas,Buka,NoHide
+[Anim] Hantu,Showing
+[Anim2] Kulkas,Tutup,NoHide
+[Anim] Player,Idle,NoWait
+[Go] Meja
+[Anim2] Meja,Minum
+[Anim2] Meja,Lihat Ibu,NoWait
+[Dialog] Player,“Hi mom…”
+[Anim] Hantu,Hilang
+[Anim2] Meja,Nangis
+[Anim] Bledek,Bledek
+[Anim] Player,Idle,NoWait
+[Anim2] Meja,Default,NoWait,NoHide
+[Dialog] Player,“It's been raining a lot lately. Hope no floods happen.”
+[State] Jendela,1
+[Full Control]
+[Trigger] Jendela
+[State] Jendela,0
+[Anim2] Jendela,Nutup,NoHide
+[Dialog] Player,“I want to pray for my mother.”
+[State] Makam,1
+[Full Control]
+[Trigger] Makam
+[State] Makam,0
+[Cutscene] Flashback
+[Anim] Player,Berdoa,NoWait
+[Dialog] Player,“I want to watch old videos with my mom on my phone.”
+[State] Kamar-Kasur,1
+[State] Kamar-Meja,1
+[State] Pintu,1
+[State] Kamar-Pintu,1
+[Full Control]
+[Trigger] Kamar-Kasur,Kamar-Meja
+[State] Kamar-Kasur,0
+[State] Kamar-Meja,0
+[Dialog] Player,“I can't find it on the bed and table.”
+[Dialog] Player,“It seems like it's in the living room.”
+[Room] Ruang Tamu,1
+[State] Lukisan,1
+[State] Makam,2
+[Full Control]
+[Trigger] Makam
+[State] Makam,0
+[Dialog] Player,“There's something strange about the painting.”
+[Full Control]
+[Trigger] Lukisan
+[State] Lukisan,2
+[Cutscene] Lukisan
+[Camera] Lukisan
+[Anim] Player,Lukisan Jatuh
+[Anim] Bledek,Bledek,NoWait
+[Move] Hantu,Ruang Tamu,Hantu
+[Anim] Hantu,Nangis
+[SFX] Nangis
+[Anim] Player,Noleh
+[Camera] Show Hantu
+[Dialog] Hantu,“Why did you kill me?”
+[Anim] Hantu,Ngejar,NoWait
+[Anim] Player,Jatuh
+[Cutscene] Flashback 2
+[End]
