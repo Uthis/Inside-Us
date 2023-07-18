@@ -9,7 +9,7 @@
 [Anim2] Sofa,Default,NoWait,NoHide
 [Anim] Player,Idle,NoWait
 [State] Kulkas,1
-[Dialog] Player,“Aku ingin minum”
+[Dialog] Player,“Aaah haus sekali…”
 [Full Control]
 [Trigger] Kulkas
 [State] Kulkas,0
@@ -20,43 +20,44 @@
 [Go] Meja
 [Anim2] Meja,Minum
 [Anim2] Meja,Lihat Ibu,NoWait
-[Dialog] Player,“Hai bu…”
+[Dialog] Player,“Ibu sedang masak apa ?”
 [Anim] Hantu,Hilang
+[Dialog] Player,"Oh iya… ibu sudah tiada…"
 [Anim2] Meja,Nangis
+[Cutscene] Flashback
 [Anim] Bledek,Bledek
 [Anim] Player,Idle,NoWait
 [Anim2] Meja,Default,NoWait,NoHide
-[Dialog] Player,“Akhir-akhir ini sering hujan badai, semoga tidak banjir”
+[Dialog] Player,“Ah! Petirnya keras sekali”
 [State] Jendela,1
 [Full Control]
 [Trigger] Jendela
 [State] Jendela,0
 [Anim2] Jendela,Nutup,NoHide
-[Dialog] Player,“aku ingin mendoakan ibu”
+[Dialog] Player,“mungkin ibu ingin aku mendoakannya ya sampai muncul di pikiranku”
 [State] Makam,1
 [Full Control]
 [Trigger] Makam
 [State] Makam,0
-[Cutscene] Flashback
 [Anim] Player,Berdoa,NoWait
-[Dialog] Player,“Aku ingin melihat video lama dengan ibu di hp ku”
 [State] Kamar-Kasur,1
 [State] Kamar-Meja,1
 [State] Pintu,1
 [State] Kamar-Pintu,1
+[Dialog] Player,“ah iya. aku perlu nelpon Lisa untuk minta data kantor. seingatku hp ku ada di kamar deh.”
 [Full Control]
 [Trigger] Kamar-Kasur,Kamar-Meja
 [State] Kamar-Kasur,0
 [State] Kamar-Meja,0
-[Dialog] Player,“Tidak ada di kasur dan meja”
-[Dialog] Player,“Sepertinya ada di ruang tamu”
+[Dialog] Player,“oh mungkin di ruang tamu ? ”
+[Dialog] Player,“tadi kan aku ketiduran di ruang tamu.”
 [Room] Ruang Tamu,1
 [State] Lukisan,1
-[State] Makam,2
+[State] Pintu (1),2
 [Full Control]
-[Trigger] Makam
-[State] Makam,0
-[Dialog] Player,“Ada yang aneh dengan lukisan”
+[Trigger] Pintu (1)
+[State] Pintu (1),0
+[Dialog] Player,“tunggu… kenapa lukisan - lukisan ini tampak… aneh ?!”
 [Full Control]
 [Trigger] Lukisan
 [State] Lukisan,2
@@ -69,6 +70,7 @@
 [SFX] Nangis
 [Anim] Player,Noleh
 [Camera] Show Hantu
+[Dialog]Player,"i..ibu.. ?"
 [Dialog] Hantu,“Mengapa kau membunuhku”
 [Anim] Hantu,Ngejar,NoWait
 [Anim] Player,Jatuh

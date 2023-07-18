@@ -19,16 +19,15 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 150368563200
-    m_Localized: Dulu ibu sering membelikanku ayam goreng
+    m_Localized: 'dulu kami selalu makan bersama. ibu sangat senang memasak. '
     m_Metadata:
       m_Items: []
   - m_Id: 1113196212224
-    m_Localized: Terutama di warung Mak Di
+    m_Localized: 'tak jarang ia juga bersenandung saat memasak. '
     m_Metadata:
       m_Items: []
   - m_Id: 1416809295872
-    m_Localized: Lukisan yang seharusnya bergambar pemandangan, kini berubah menjadi
-      nilai rapotku ketika SMA
+    m_Localized: kok warnanya jadi memerah gini ya ?
     m_Metadata:
       m_Items: []
   - m_Id: 1544785899520
@@ -36,29 +35,32 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1805717745664
-    m_Localized: ...
+    m_Localized: AH!!!
     m_Metadata:
       m_Items: []
   - m_Id: 1910852169728
-    m_Localized: Waktu itu ibu meninggal karena tersedak cimol,cimol itu aku beli
-      di mang soleh
+    m_Localized: sebelum kejadian naas itu, kami bertengkar.
     m_Metadata:
       m_Items: []
   - m_Id: 2027051167744
-    m_Localized: Padahal ibu menyuruhku untuk membelinya di mak ijah karena cimol
-      mang soleh kenyal seperti mochi
+    m_Localized: aku sudah tidak begitu ingat tentang masalah apa, yang ku ingat
+      adalah aku  menyakiti perasaan ibuku dan tidak sempat meminta maaf kepadanya.
     m_Metadata:
       m_Items: []
   - m_Id: 2099243528192
-    m_Localized: mungkin karena mang soleh menggunakan slime sebagai pengganti borax
+    m_Localized: ' mungkin itu penyesalan terbesarku'
     m_Metadata:
       m_Items: []
   - m_Id: 2683266805760
-    m_Localized: Tidak ada di meja
+    m_Localized: hmm gak ada di meja..
     m_Metadata:
       m_Items: []
   - m_Id: 2817383870464
-    m_Localized: Tidak ada di kasur
+    m_Localized: dimana ya hp ku? di kasur juga gak ada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7619120222375936
+    m_Localized: 'semoga ibu tenang disana ya. '
     m_Metadata:
       m_Items: []
   references:
