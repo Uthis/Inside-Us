@@ -44,6 +44,7 @@
 [State] Kamar-Meja,1
 [State] Pintu,1
 [State] Kamar-Pintu,1
+[Dialog] Player,“...”
 [Dialog] Player,“ah iya. aku perlu nelpon Lisa untuk minta data kantor. seingatku hp ku ada di kamar deh.”
 [Full Control]
 [Trigger] Kamar-Kasur,Kamar-Meja
@@ -53,10 +54,10 @@
 [Dialog] Player,“tadi kan aku ketiduran di ruang tamu.”
 [Room] Ruang Tamu,1
 [State] Lukisan,1
-[State] Pintu (1),2
+[State] Pintu1,1
 [Full Control]
-[Trigger] Pintu (1)
-[State] Pintu (1),0
+[Trigger] Makam
+[State] Pintu1,0
 [Dialog] Player,“tunggu… kenapa lukisan - lukisan ini tampak… aneh ?!”
 [Full Control]
 [Trigger] Lukisan
@@ -70,7 +71,7 @@
 [SFX] Nangis
 [Anim] Player,Noleh
 [Camera] Show Hantu
-[Dialog]Player,"i..ibu.. ?"
+[Dialog] Player,“i..ibu.. ?“
 [Dialog] Hantu,“Mengapa kau membunuhku”
 [Anim] Hantu,Ngejar,NoWait
 [Anim] Player,Jatuh
